@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -34,14 +35,116 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-const questions = [
-  {
-    type: 'input',
-    name: 'name',
-    message: 'Enter name: '
-  }
-]
+// what is this employee?
+// name, id, email, other
+// is there another employee? 
+// what is this employee?
+// name, id, email, other 
+// another? etc..
 
-inquirer.prompt(questions).then(function(answers){
-  console.log(answers)
-})
+// let i = 0;
+
+
+// const anotherEmployee = [
+//   {
+//     type: 'confirm',
+//     name: 'anotherEmp',
+//     message: 'Do you have another employee you want to add?',
+//     default: true
+//   }
+// ]
+
+// inquirer.prompt(anotherEmployee).then(function (answers) {
+//   console.log(answers.anotherEmp)
+//   if (answers.anotherEmp === true) {
+//     inquirer.prompt(anotherEmployee).then(function (answers) {
+//       console.log(answers)
+//     })
+//   }
+// })
+
+
+
+//  inquirer.prompt(questions).then(function (answers) {
+//     console.log(answers);
+//     inquirer.prompt(anotherEmployee).then(function (answers){
+//       if (answers.anotherEmp){
+//         inquirer.prompt(questions)
+//       }
+//     })
+//   })
+
+// let employeeList = []
+
+// for (i=0 ; i>employeeList.length; i++){
+//   inquirer.prompt(questions).then(function(answers){
+//     employeeList.push(answers)
+//   })
+//   inquirer.prompt(anotherEmployee).then(function(answers){
+//     if (answers.anotherEmp){break}
+//   })
+// }
+
+let i = 0;
+const collectInputs = async (inputs = []) => {
+  i++
+
+  let questions = [
+    {
+      type: 'list',
+      name: `employeeType`,
+      message: 'This employee is a: ',
+      choices: [
+        'Manager',
+        'Engineer',
+        'Intern'
+      ]
+    },
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What is this employee\'s name?'
+    },
+    {
+      type: 'input',
+      name: 'officeNumber',
+      message: 'What is this manager\'s office number?',
+      when: function (answers) {
+        return answers.employeeType === 'Manager'
+      }
+    },
+    {
+      type: 'input',
+      name: `github`,
+      message: 'What is this engineer\'s Github username?',
+      when: function (answers) {
+        return answers.employeeType === 'Engineer'
+      }
+    },
+    {
+      type: 'input',
+      name: `school`,
+      message: 'What is this name of this intern\'s school?',
+      when: function (answers) {
+        return answers.employeeType === 'Intern'
+      }
+    },
+    {
+      type: 'confirm',
+      name: 'again',
+      message: 'Enter another input? ',
+      default: true
+    }
+  ];
+
+  const { again, ...answers } = await inquirer.prompt(questions);
+  const newInputs = [...inputs, answers];
+  return again ? collectInputs(newInputs) : newInputs;
+};
+
+const buildHTML = async () => {
+  const inputs = await collectInputs();
+  console.log(inputs); //change this to build html 
+};
+
+buildHTML();
