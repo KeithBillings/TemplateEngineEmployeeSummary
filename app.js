@@ -42,52 +42,7 @@ const Employee = require("./lib/Employee");
 // name, id, email, other 
 // another? etc..
 
-// let i = 0;
-
-
-// const anotherEmployee = [
-//   {
-//     type: 'confirm',
-//     name: 'anotherEmp',
-//     message: 'Do you have another employee you want to add?',
-//     default: true
-//   }
-// ]
-
-// inquirer.prompt(anotherEmployee).then(function (answers) {
-//   console.log(answers.anotherEmp)
-//   if (answers.anotherEmp === true) {
-//     inquirer.prompt(anotherEmployee).then(function (answers) {
-//       console.log(answers)
-//     })
-//   }
-// })
-
-
-
-//  inquirer.prompt(questions).then(function (answers) {
-//     console.log(answers);
-//     inquirer.prompt(anotherEmployee).then(function (answers){
-//       if (answers.anotherEmp){
-//         inquirer.prompt(questions)
-//       }
-//     })
-//   })
-
-// let employeeList = []
-
-// for (i=0 ; i>employeeList.length; i++){
-//   inquirer.prompt(questions).then(function(answers){
-//     employeeList.push(answers)
-//   })
-//   inquirer.prompt(anotherEmployee).then(function(answers){
-//     if (answers.anotherEmp){break}
-//   })
-// }
-
-let i = 0;
 const collectInputs = async (inputs = []) => {
-  i++
 
   let questions = [
     {
@@ -104,6 +59,16 @@ const collectInputs = async (inputs = []) => {
       type: 'input',
       name: 'name',
       message: 'What is this employee\'s name?'
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'What is this employee\'s id?'
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'What is this employee\'s email?'
     },
     {
       type: 'input',
@@ -145,6 +110,8 @@ const collectInputs = async (inputs = []) => {
 const buildHTML = async () => {
   const inputs = await collectInputs();
   console.log(inputs); //change this to build html 
+  console.log(inputs[0])
+  console.log(inputs[0].name)
 };
 
 buildHTML();
