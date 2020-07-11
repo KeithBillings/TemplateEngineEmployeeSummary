@@ -11,10 +11,6 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -24,23 +20,6 @@ const Employee = require("./lib/Employee");
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
-
-// what is this employee?
-// name, id, email, other
-// is there another employee? 
-// what is this employee?
-// name, id, email, other 
-// another? etc..
 
 const collectInputs = async (inputs = []) => {
 
@@ -109,9 +88,24 @@ const collectInputs = async (inputs = []) => {
 
 const buildHTML = async () => {
   const inputs = await collectInputs();
-  console.log(inputs); //change this to build html 
-  console.log(inputs[0])
-  console.log(inputs[0].name)
+  let employeeList = [];
+  // Loop through answers and apply classes to them, then push them to array
+  for (i=0; i<inputs.length; i++){
+    if (inputs[i].employeeType === 'Manager'){
+      let emp = new Manager (inputs[i].name, inputs[i].id, inputs[i].email, inputs[i].officeNumber)
+      employeeList.push(emp);
+    }
+    if (inputs[i].employeeType === 'Engineer'){
+      let emp = new Engineer (inputs[i].name, inputs[i].id, inputs[i].email, inputs[i].github)
+      employeeList.push(emp);
+    }
+    if (inputs[i].employeeType === 'Intern'){
+      let emp = new Intern (inputs[i].name, inputs[i].id, inputs[i].email, inputs[i].school)
+      employeeList.push(emp);
+    }
+  }
+  console.log(employeeList);
+  // render(employeeList);
 };
 
 buildHTML();
