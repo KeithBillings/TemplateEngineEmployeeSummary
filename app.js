@@ -104,8 +104,11 @@ const buildHTML = async () => {
       employeeList.push(emp);
     }
   }
-  console.log(employeeList);
-  // render(employeeList);
+
+  fs.writeFile('index.html', render(employeeList), (err) => {
+    if (err) throw err;
+    console.log('The file has been saved!');
+  });
 };
 
 buildHTML();
