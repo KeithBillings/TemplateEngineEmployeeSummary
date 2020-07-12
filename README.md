@@ -14,7 +14,9 @@ This is a CLI app that takes in employee informaton and outputs a generated HTML
 
  * [Tests](#tests)
 
- * [Authors](#Authors)
+ * [Authors](#authors)
+
+ * [Questions](#questions)
 
 ## Installation
 
@@ -27,13 +29,15 @@ invoke the CLI prompts with
 node app.js
 ```
 
+When done answering questions, the generated HTML will go into the "Output" folder named "team.html".
+
 ## Usage
 
 This is a demonstration of using automated code and templates 
 
 ## Screenshots
 
-![image]()
+![image](./screenshots/screenshot1.png)
 
 ## Tests 
 
