@@ -11,16 +11,6 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
 const collectInputs = async (inputs = []) => {
 
   let questions = [
@@ -81,6 +71,7 @@ const collectInputs = async (inputs = []) => {
     }
   ];
 
+  // Loops through questions recursively until user is done
   const { again, ...answers } = await inquirer.prompt(questions);
   const newInputs = [...inputs, answers];
   return again ? collectInputs(newInputs) : newInputs;
@@ -105,10 +96,11 @@ const buildHTML = async () => {
     }
   }
 
-  fs.writeFile('index.html', render(employeeList), (err) => {
+  // When done gathering input, renders HTML file and writes it to "output" folder
+  fs.writeFile(outputPath, render(employeeList), (err) => {
     if (err) throw err;
     console.log('The file has been saved!');
   });
 };
 
-buildHTML();
+buildHTML(); 
