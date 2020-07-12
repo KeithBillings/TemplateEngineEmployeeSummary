@@ -1,0 +1,17 @@
+body {
+  background-image: url(./images/email-pattern.png);
+}
+
+.card {
+  margin: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 7px;
+}
+
+.jumbotron {
+  background-color: rgba(135, 207, 235, 0.4);
+  border-radius: 0;
+}
+
+.jumbotron > h1 {
+  text-shadow: rgba(0, 0, 0, 0.5) 0px 5px 7px;
+}
