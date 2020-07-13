@@ -42,10 +42,10 @@ This is a demonstration of using automated code and templates
 ## Tests 
 
 To run tests: 
- 
-    ``` 
-    npm test 
-    ``` 
+
+``` 
+npm test 
+``` 
 
 ## Authors
 
